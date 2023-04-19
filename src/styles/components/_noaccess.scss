@@ -1,0 +1,18 @@
+.noaccess {
+    padding-top: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.access {
+    // padding-top: 10px;
+    text-decoration: none;
+    color: $color-1;
+}
+
+.access:hover {
+    transition: 0.5s;
+    text-decoration: underline;
+    color: $color-4;
+}

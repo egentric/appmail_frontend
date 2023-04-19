@@ -1,0 +1,204 @@
+@font-face {
+  font-family: "font-1";
+  src: url(../assets/fonts/Nunito-Medium.ttf);
+}
+@font-face {
+  font-family: "font-2";
+  src: url(../assets/fonts/Poppins-Regular.ttf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "font-2", sans-serif;
+  color: rgb(40, 41, 49);
+  background-color: rgb(245, 245, 250);
+}
+
+h1 {
+  font-family: "font-1", sans-serif;
+  color: rgb(46, 84, 150);
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-family: "font-1", sans-serif;
+  color: rgb(46, 84, 150);
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  padding-top: 10px;
+  font-family: "font-1", sans-serif;
+  color: rgb(245, 245, 250);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+h5 {
+  font-family: "font-1", sans-serif;
+  color: rgb(20, 39, 71);
+}
+
+nav {
+  background-color: rgb(40, 41, 49) !important;
+  font-family: "font-1", sans-serif !important;
+}
+
+.navLink {
+  color: rgb(245, 245, 250) !important;
+  border-bottom: 3px solid rgb(40, 41, 49);
+  padding-top: 0px;
+  margin-right: 10px;
+}
+
+.navLink:hover {
+  color: rgb(176, 178, 214) !important;
+  transition: 0.5s;
+  border-bottom: 3px solid rgb(214, 217, 235);
+  transform: scale(1);
+}
+
+.navLink:active {
+  color: rgb(244, 229, 90) !important;
+  border-bottom: 3px solid rgb(255, 237, 0);
+}
+
+.menu {
+  margin-left: 5px !important;
+}
+
+.menuGauche {
+  padding-top: 20px;
+  background-color: rgb(102, 120, 176);
+  position: fixed;
+  left: 0;
+  top: 60px;
+  height: 100vh;
+}
+.menuGauche .menuG {
+  text-decoration: none;
+  font-size: 1rem;
+  padding-right: 5px;
+  color: rgb(245, 245, 250) !important;
+}
+.menuGauche .menuG:hover {
+  transition: 1s;
+  font-size: 1rem;
+  color: rgb(20, 39, 71) !important;
+}
+.menuGauche .menubis {
+  padding-left: 15px;
+}
+.menuGauche ul {
+  margin-left: -25px;
+}
+
+.toggle {
+  padding-top: 20px;
+  background-color: rgb(102, 120, 176);
+  position: fixed;
+  left: 0;
+  top: 60px;
+  height: 100vh;
+}
+
+.icone {
+  font-size: 1.2rem;
+  padding-right: 10px;
+  color: rgb(46, 84, 150);
+}
+
+.icone:hover {
+  transition: 1s;
+  font-size: 1.2rem;
+  color: rgb(237, 109, 99);
+}
+
+.card-header {
+  background-color: rgb(46, 84, 150) !important;
+  border-radius: 15px 15px 0px 0px !important;
+}
+
+.card {
+  box-shadow: 3px 3px 10px rgb(151, 151, 151) !important;
+  border-radius: 15px !important;
+}
+
+select {
+  background-color: rgb(102, 120, 176) !important;
+  color: rgb(245, 245, 250) !important;
+}
+select option {
+  background-color: rgb(245, 245, 250) !important;
+  color: rgb(20, 39, 71);
+}
+
+.rien {
+  text-decoration: none;
+  color: rgb(40, 41, 49);
+}
+
+.rien:hover {
+  transition: 0.5s;
+  text-decoration: none;
+  color: rgb(231, 51, 51);
+}
+
+li {
+  list-style: none;
+}
+
+.btnBlueF {
+  background-color: rgb(245, 245, 250);
+  border-radius: 15px;
+  border-color: rgb(20, 39, 71);
+  padding: 1px 6px 1px 6px;
+  margin-bottom: 5px;
+  color: rgb(20, 39, 71);
+}
+
+.btnBlueF:hover {
+  transition: 0.5s;
+  background-color: rgb(46, 84, 150);
+  color: rgb(245, 245, 250) !important;
+}
+
+.btnRed {
+  background-color: rgb(237, 109, 99);
+  border-radius: 10px;
+  border: none;
+  padding: 8px;
+  color: rgb(20, 39, 71) !important;
+  margin-bottom: 5px;
+}
+
+.btnRed:hover {
+  transition: 0.5s;
+  background-color: rgb(231, 51, 51);
+  color: rgb(245, 245, 250) !important;
+  font-weight: bold;
+}
+
+.btnBlue {
+  background-color: rgb(102, 120, 176) !important;
+  border-radius: 8px;
+  border: none !important;
+  padding: 8px;
+  margin-bottom: 5px;
+  color: rgb(245, 245, 250) !important;
+}
+
+.btnBlue:hover {
+  transition: 0.5s;
+  background-color: rgb(46, 84, 150) !important;
+  color: rgb(245, 245, 250) !important;
+}/*# sourceMappingURL=index.css.map */

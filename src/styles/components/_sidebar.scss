@@ -1,0 +1,41 @@
+  // MENU LATERAL===============
+
+  .menuGauche {
+      padding-top: 20px;
+      background-color: $blue2;
+      position: fixed;
+      left: 0;
+      top: 60px;
+      height: 100vh;
+
+      .menuG {
+          text-decoration: none;
+          font-size: 1rem;
+          padding-right: 5px;
+          color: $White !important;
+      }
+
+      .menuG:hover {
+          transition: 1s;
+          font-size: 1rem;
+          color: $blue1 !important;
+      }
+
+      .menubis {
+          padding-left: 15px;
+          ;
+      }
+
+      ul {
+          margin-left: -25px;
+      }
+  }
+
+  .toggle {
+      padding-top: 20px;
+      background-color: $blue2;
+      position: fixed;
+      left: 0;
+      top: 60px;
+      height: 100vh;
+  }

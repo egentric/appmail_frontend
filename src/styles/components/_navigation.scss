@@ -1,0 +1,30 @@
+  // NAVIGATION HAUT============================
+
+  nav {
+    background-color: $black !important;
+    font-family: $font-1 !important;
+  }
+
+  .navLink {
+    color: $White !important;
+    border-bottom: 3px solid $black;
+    padding-top: 0px;
+    margin-right: 10px;
+  }
+
+  .navLink:hover {
+    color: $blue4 !important;
+    transition: 0.5s;
+    border-bottom: 3px solid $blue5;
+    transform: scale(1);
+  }
+
+  .navLink:active {
+    color: $yellow1 !important;
+    border-bottom: 3px solid $yellow;
+
+  }
+
+  .menu {
+    margin-left: 5px !important;
+  }
