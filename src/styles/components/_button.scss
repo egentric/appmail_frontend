@@ -18,20 +18,20 @@
   }
 
   .btnRed {
-      background-color: $red1;
+      background-color: $red1 !important;
       border-radius: 10px;
-      border: none;
+      border: none !important;
       padding: 8px;
-      color: $blue1 !important;
+      color: $White !important;
       margin-bottom: 5px;
 
   }
 
   .btnRed:hover {
       transition: 0.5s;
-      background-color: $red;
+      background-color: $red !important;
       color: $White !important;
-      font-weight: bold;
+      //   font-weight: bold;
 
   }
 

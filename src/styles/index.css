@@ -173,19 +173,18 @@ li {
 }
 
 .btnRed {
-  background-color: rgb(237, 109, 99);
+  background-color: rgb(237, 109, 99) !important;
   border-radius: 10px;
-  border: none;
+  border: none !important;
   padding: 8px;
-  color: rgb(20, 39, 71) !important;
+  color: rgb(245, 245, 250) !important;
   margin-bottom: 5px;
 }
 
 .btnRed:hover {
   transition: 0.5s;
-  background-color: rgb(231, 51, 51);
+  background-color: rgb(231, 51, 51) !important;
   color: rgb(245, 245, 250) !important;
-  font-weight: bold;
 }
 
 .btnBlue {
