@@ -30,16 +30,9 @@ const Navigation = ({ onSelect }) => {
 
   // console.log(isConnected);
   useEffect(() => {
-    displayTypes();
     displayUsers();
   }, []);
   // Sans les crochets ça tourne en boucle
-
-  const displayTypes = async () => {
-    await axios.get("http://localhost:8000/api/types").then((res) => {
-      setTypes(res.data.data);
-    });
-  };
 
   const removeToken = () => {
     localStorage.removeItem("access_token");
