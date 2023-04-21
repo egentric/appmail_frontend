@@ -1,12 +1,12 @@
   // LIEN DASHBOARD=================
 
 
-  .rien {
-      text-decoration: none;
+  .bloc {
+      text-decoration: none !important;
       color: $black;
   }
 
-  .rien:hover {
+  .bloc:hover {
       transition: 0.5s;
       text-decoration: none;
       color: $red;

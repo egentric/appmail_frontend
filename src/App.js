@@ -6,6 +6,8 @@ import Login from "./pages/layouts/Login";
 import Register from "./pages/layouts/Register";
 import Noaccess from "./pages/layouts/Noaccess";
 
+import DashboardAppmail from "./pages/layouts/DashboardAppmail";
+
 import AppmailCategories from "./pages/appmail_categories/AppmailCategories";
 import AddAppmailCategory from "./pages/appmail_categories/AddAppmailCategory";
 import EditAppmailCategory from "./pages/appmail_categories/EditAppmailCategory";
@@ -25,6 +27,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+
+        <Route path="/dashboardAppmail" element={<DashboardAppmail />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />

@@ -51,3 +51,21 @@
       //   font-weight: bold;
 
   }
+
+  .btnWhite {
+      background-color: $White !important;
+      border-radius: 15px !important;
+      border-color: $blue !important;
+      padding: 8px;
+      margin-bottom: 5px;
+      color: $blue !important;
+      font-weight: bold !important;
+  }
+
+  .btnWhite:hover {
+      transition: 0.5s;
+      background-color: $blue !important;
+      color: $White !important;
+      //   font-weight: bold;
+
+  }
