@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -79,6 +80,7 @@ const Sidebar = () => {
                 <span className="menu d-none d-md-inline">Appmail</span>
               </Nav.Link>
             </li>
+
             <li>
               <Nav.Link href="/dashboardAppmail" className="menuG">
                 <svg
