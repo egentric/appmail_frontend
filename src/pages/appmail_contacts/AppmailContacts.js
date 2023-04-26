@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
 import Sidebar from "../../components/Sidebar";
 import Navigation from "../../components/Navigation";
@@ -11,7 +12,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const AppmailContacts = () => {
-  const [contacts, setContacts] = useState("");
+  const [contacts, setContacts] = useState([]);
   const [category, setCategory] = useState("Toutes les catégories"); // initial state pour la catégorie
   useEffect(() => {
     displayContacts();
@@ -19,7 +20,7 @@ const AppmailContacts = () => {
   }, []);
   // Sans les crochets ça tourne en boucle
 
-  // // ------------Affichage Select----------------------------------------//
+  // // ------------Affichage Select Catégories----------------------------------------//
   // état pour stocker les catégories
   const [categories, setCategories] = useState([]);
 
@@ -38,14 +39,14 @@ const AppmailContacts = () => {
   };
   // // ------------Fin Affichage Select------------------------------------------//
 
-  // // ------------Récupértion value du Select------------------------------------------//
+  // // ------------Récupértion value du Select Catégories------------------------------------------//
   const [selectedValue, setSelectedValue] = useState("");
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
   // // ------------ Fin Récupértion value du Select------------------------------------------//
 
-  // // ------------Récupértion value du Select------------------------------------------//
+  // // ------------Récupértion value du Select business ------------------------------------------//
   const [selectedValueB, setSelectedValueB] = useState("");
   const handleSelectChangeB = (event) => {
     setSelectedValueB(event.target.value);
@@ -60,7 +61,7 @@ const AppmailContacts = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
 
         setContacts(res.data.data);
       });
@@ -74,11 +75,27 @@ const AppmailContacts = () => {
       })
       .then(displayContacts);
   };
-  console.log(contacts[0]);
+  // console.log(contacts[0]);
   // const filteredContacts = selectedCategory
   //   ? contacts.filter((contact) => contact.category === selectedCategory)
   //   : contacts;
 
+  // ============= fonction copie des emails =====================
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyClick = () => {
+    const emails = contacts.map((contact) => contact.appmail_contact_email);
+    const allEmails = emails.join(", ");
+
+    navigator.clipboard
+      .writeText(allEmails)
+      .then(() => setCopied(true))
+      .catch(() => setCopied(false));
+  };
+
+  const handleClose = () => setCopied(false);
+  // const handleShow = () => setCopied(true);
   return (
     <div>
       <Navigation />
@@ -88,7 +105,7 @@ const AppmailContacts = () => {
         </Col>
         <Col>
           <div className="row justify-content-center mt-5">
-            <div className="col-8 col-sm-8 col-md-8">
+            <div className="col-11 col-sm-11 col-md-11">
               <div className="card mt-5">
                 <div className="card-header">
                   <h3 className="card-title">
@@ -154,7 +171,7 @@ const AppmailContacts = () => {
                       <Button
                         className="btn btnBlue btn-sm"
                         onClick={() => {
-                          // deleteContact(contact.id);
+                          handleCopyClick();
                         }}
                       >
                         <svg
@@ -174,11 +191,25 @@ const AppmailContacts = () => {
                         </svg>
                         <span className="menu">Copier les adresses</span>
                       </Button>
+                      <Modal show={copied} onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Email copié</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          Les adresses email ont été copiées dans le
+                          presse-papiers.
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Fermer
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
                     </Col>
                   </Row>
                   <Link
                     to={`/appmail_contacts/add`}
-                    className="btn btnBlue btn-sm me-2 mb-2"
+                    className="btn btnBlue btn-sm me-2 mb-2 mt-2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -212,8 +243,8 @@ const AppmailContacts = () => {
                           <td>{contact.appmail_contact_email}</td>
                           <td>{contact.appmail_contact_business}</td>
                           <td>
-                            {contact.category_name}
-                            {/* <ul>
+                            {/*   {contact.category_name}
+                             <ul>
                               {contact.category_name.map((category) => (
                                 <li key={category.id}>
                                   {category_name}
@@ -221,7 +252,6 @@ const AppmailContacts = () => {
                               ))}
                             </ul> */}
                           </td>
-
                           <td>
                             <Link
                               to={`/appmail_contacts/show/${contact.id}`}
