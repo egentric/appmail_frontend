@@ -13,6 +13,7 @@ import AddAppmailCategory from "./pages/appmail_categories/AddAppmailCategory";
 import EditAppmailCategory from "./pages/appmail_categories/EditAppmailCategory";
 
 import AppmailContacts from "./pages/appmail_contacts/AppmailContacts";
+import AppmailContactsCategory from "./pages/appmail_contacts/AppmailContactsCategory";
 import AddAppmailContact from "./pages/appmail_contacts/AddAppmailContact";
 import EditAppmailContact from "./pages/appmail_contacts/EditAppmailContact";
 import ShowAppmailContact from "./pages/appmail_contacts/ShowAppmailContact";
@@ -46,6 +47,10 @@ const App = () => {
         />
 
         <Route path="/appmail_contacts" element={<AppmailContacts />} />
+        <Route
+          path="/appmail_contacts/category/:appmail_category"
+          element={<AppmailContactsCategory />}
+        />
 
         <Route path="/appmail_contacts/add" element={<AddAppmailContact />} />
         <Route

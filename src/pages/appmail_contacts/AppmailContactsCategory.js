@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -9,14 +10,13 @@ import Modal from "react-bootstrap/Modal";
 import Sidebar from "../../components/Sidebar";
 import Navigation from "../../components/Navigation";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const AppmailContacts = () => {
+  const { appmail_category } = useParams();
   const [contacts, setContacts] = useState([]);
-  const history = useHistory();
   const [contactsBusiness, setContactsBusiness] = useState([]);
-  // const [category, setCategory] = useState("Toutes les catégories"); // initial state pour la catégorie
+  const [category, setCategory] = useState([]);
   const [categories, setCategories] = useState([]); // état pour stocker les catégories
   const [selectedValue, setSelectedValue] = useState("");
   const [contactsFilter, setContactsFilter] = useState([]);
@@ -24,7 +24,7 @@ const AppmailContacts = () => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    displayContacts();
+    displayCategoryContacts();
     getCategories();
     displayContactsBusiness();
   }, []);
@@ -49,10 +49,7 @@ const AppmailContacts = () => {
 
   // // ------------Récupértion value du Select Catégories------------------------------------------//
   const handleSelectChange = (event) => {
-    const categoryId = event.target.value;
-    setSelectedValue(categoryId);
-    /* eslint-disable no-restricted-globals */
-    history.push(`/appmail_contacts/category/${categoryId}`);
+    setSelectedValue(event.target.value);
   };
   // // ------------ Fin Récupértion value du Select------------------------------------------//
 
@@ -102,26 +99,30 @@ const AppmailContacts = () => {
     // Vérifier si l'option "Filtrer par Entreprise" est sélectionnée ou non
     if (value === "Filtrer par Entreprise :") {
       // Si l'option est sélectionnée, afficher tous les contacts
-      displayContacts();
+      displayCategoryContacts();
     } else {
       // Sinon, filtrer les contacts par entreprise sélectionnée
       displayContactFilterBusiness(value);
     }
   };
 
-  // ============= fonction affichage general =====================
+  // ============= fonction affichage general par Categories =====================
 
-  const displayContacts = async () => {
+  const displayCategoryContacts = async () => {
     await axios
-      .get(`http://localhost:8000/api/appmail_contacts`, {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("access_token"),
-        },
-      })
+      .get(
+        `http://localhost:8000/api/appmail_contacts/category/${appmail_category}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data.data);
 
-        setContacts(res.data.data);
+        setContacts(res.data.data.appmail_contacts);
+        setCategory(res.data.data);
       });
   };
   // ============= fonction delete =====================
@@ -133,7 +134,7 @@ const AppmailContacts = () => {
           Authorization: "Bearer" + localStorage.getItem("access_token"),
         },
       })
-      .then(displayContacts);
+      .then(displayCategoryContacts);
   };
 
   // ============= fonction copie des emails =====================
@@ -150,7 +151,7 @@ const AppmailContacts = () => {
 
   const handleClose = () => setCopied(false);
   // ============= fin fonction copie des emails =====================
-  // console.log(contacts);
+
   return (
     <div>
       <Navigation />
@@ -281,7 +282,15 @@ const AppmailContacts = () => {
                     </svg>
                     <span className="menu">Nouveau</span>
                   </Link>
+
                   <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th colspan="6">
+                          <h4>Catégorie {category.appmail_category_name}</h4>
+                        </th>
+                      </tr>
+                    </thead>
                     <thead>
                       <tr>
                         <th>Noms</th>
@@ -301,8 +310,8 @@ const AppmailContacts = () => {
                           <td>{contact.appmail_contact_email}</td>
                           <td>{contact.appmail_contact_business}</td>
                           <td>
-                            <ul>
-                              {contact.appmail_category.map((category) => (
+                            {/* <ul>
+                              {category.map((category) => (
                                 <li key={category.id}>
                                   <Link
                                     to={`/appmail_contacts/category/${category.id}`}
@@ -314,7 +323,7 @@ const AppmailContacts = () => {
                                   </Link>
                                 </li>
                               ))}
-                            </ul>
+                            </ul> */}
                           </td>
                           <td>
                             <Link
