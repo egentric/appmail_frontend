@@ -28,6 +28,11 @@ const AppmailContacts = () => {
     displayCategoryContacts();
     getCategories();
     displayContactsBusiness();
+
+    const storedCategory = localStorage.getItem("selectedValue");
+    if (storedCategory) {
+      setSelectedValue(storedCategory);
+    }
   }, []);
   // Sans les crochets ça tourne en boucle
 
@@ -51,13 +56,26 @@ const AppmailContacts = () => {
   // // ------------Récupértion value du Select Catégories------------------------------------------//
   const handleSelectChange = (event) => {
     const categoryId = event.target.value;
-    setSelectedValue(categoryId);
+    localStorage.setItem("selectedValue", categoryId); // stockez la catégorie sélectionnée dans localStorage
+    if (!selectedValueB) {
+      // si secondSelectValue n'a pas de valeur, réinitialisez selectedValue
+      setSelectedValue("");
+    } else {
+      setSelectedValue(categoryId);
+    }
     /* eslint-disable no-restricted-globals */
     navigate(`/appmail_contacts/category/${categoryId}`);
+    setSelectedValue(""); // réinitialisez la variable d'état
     window.location.reload();
   };
-  // // ------------ Fin Récupértion value du Select------------------------------------------//
-
+  // // ------------ button category dans le tableau------------------------------------------//
+  const handleCategoryClick = (categoryId) => {
+    localStorage.setItem("selectedValue", categoryId);
+    setSelectedValue(categoryId);
+    navigate(`/appmail_contacts/category/${categoryId}`);
+    setSelectedValueB(""); // réinitialisez la variable d'état secondSelectValue
+    window.location.reload();
+  };
   // ============= fonction affichage du filtre business =====================
 
   const displayContactsBusiness = async () => {
@@ -98,6 +116,7 @@ const AppmailContacts = () => {
   const handleSelectChangeB = (event) => {
     const value = event.target.value;
     setSelectedValueB(value);
+    setSelectedValue("");
     // console.log(value);
     // console.log(selectedValueB);
     setContacts([]);
@@ -126,8 +145,7 @@ const AppmailContacts = () => {
       .then((res) => {
         console.log(res.data.data);
 
-        setContacts(res.data.data.appmail_contacts);
-        setCategory(res.data.data);
+        setContacts(res.data.data);
       });
   };
   // ============= fonction delete =====================
@@ -156,7 +174,11 @@ const AppmailContacts = () => {
 
   const handleClose = () => setCopied(false);
   // ============= fin fonction copie des emails =====================
+  // ============= fonction reset =====================
 
+  const handleResetClick = () => {
+    navigate(`/appmail_contacts`);
+  };
   return (
     <div>
       <Navigation />
@@ -218,7 +240,7 @@ const AppmailContacts = () => {
                           value={selectedValue}
                           onChange={handleSelectChange}
                         >
-                          <option>Filtrer par Catégorie :</option>
+                          <option value="">Filtrer par Catégorie :</option>
                           {categories.map((category) => (
                             <option key={category.id} value={category.id}>
                               {category.appmail_category_name}
@@ -232,7 +254,7 @@ const AppmailContacts = () => {
                     {/* // // ------------ Copie mail --------------------------------// */}
                     <Col>
                       <Button
-                        className="btn btnBlue btn-sm p-2 "
+                        className="btn btnBlue btn-sm p-2 mx-2 "
                         onClick={() => {
                           handleCopyClick();
                         }}
@@ -268,6 +290,29 @@ const AppmailContacts = () => {
                           </Button>
                         </Modal.Footer>
                       </Modal>
+                      {/* // // ------------ Reset --------------------------------// */}
+                      <Button
+                        className="btn btnBlue btn-sm p-2 "
+                        onClick={() => {
+                          handleResetClick();
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-arrow-clockwise"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+                          />
+                          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                        </svg>
+                        <span className="menu">Reset</span>
+                      </Button>
                     </Col>
                   </Row>
                   <Link
@@ -289,13 +334,13 @@ const AppmailContacts = () => {
                   </Link>
 
                   <Table striped bordered hover>
-                    <thead>
+                    {/* <thead>
                       <tr>
                         <th colspan="6">
                           <h4>Catégorie {category.appmail_category_name}</h4>
                         </th>
                       </tr>
-                    </thead>
+                    </thead> */}
                     <thead>
                       <tr>
                         <th>Noms</th>
@@ -315,20 +360,22 @@ const AppmailContacts = () => {
                           <td>{contact.appmail_contact_email}</td>
                           <td>{contact.appmail_contact_business}</td>
                           <td>
-                            {/* <ul>
-                              {category.map((category) => (
+                            <ul>
+                              {contact.appmail_category.map((category) => (
                                 <li key={category.id}>
-                                  <Link
-                                    to={`/appmail_contacts/category/${category.id}`}
+                                  <button
                                     className="btn btnWhite btn-sm"
+                                    onClick={() =>
+                                      handleCategoryClick(category.id)
+                                    }
                                   >
                                     <span className="menu">
                                       {category.appmail_category_name}
                                     </span>
-                                  </Link>
+                                  </button>
                                 </li>
                               ))}
-                            </ul> */}
+                            </ul>
                           </td>
                           <td>
                             <Link
