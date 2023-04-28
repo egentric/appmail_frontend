@@ -38,7 +38,7 @@ const Navigation = ({ onSelect }) => {
     localStorage.removeItem("access_token");
     // console.log("test");
     setIsConnected(false);
-    navigate("/home");
+    navigate("/login");
   };
   // Vérifier si le token est présent dans localStorage et mettre à jour l'état isConnected en conséquence
   useEffect(() => {
