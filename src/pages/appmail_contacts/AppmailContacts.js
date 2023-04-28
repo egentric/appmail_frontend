@@ -9,12 +9,11 @@ import Modal from "react-bootstrap/Modal";
 import Sidebar from "../../components/Sidebar";
 import Navigation from "../../components/Navigation";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AppmailContacts = () => {
   const [contacts, setContacts] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [contactsBusiness, setContactsBusiness] = useState([]);
   // const [category, setCategory] = useState("Toutes les catégories"); // initial state pour la catégorie
   const [categories, setCategories] = useState([]); // état pour stocker les catégories
@@ -52,7 +51,7 @@ const AppmailContacts = () => {
     const categoryId = event.target.value;
     setSelectedValue(categoryId);
     /* eslint-disable no-restricted-globals */
-    history.push(`/appmail_contacts/category/${categoryId}`);
+    navigate(`/appmail_contacts/category/${categoryId}`);
   };
   // // ------------ Fin Récupértion value du Select------------------------------------------//
 

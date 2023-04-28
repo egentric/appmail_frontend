@@ -22,6 +22,7 @@ const Home = () => {
   const [userId, setUserId] = useState([]);
   const [userFirstname, setUserFirstname] = useState([]);
   const [userLastname, setUserLastname] = useState([]);
+  const [role, setRole] = useState([]);
 
   const displayUser = async () => {
     await axios
@@ -35,6 +36,7 @@ const Home = () => {
         setUserId(res.data.id);
         setUserFirstname(res.data.user_firstname);
         setUserLastname(res.data.user_lastname);
+        setRole(res.data.role_id);
       });
   };
 
@@ -76,7 +78,7 @@ const Home = () => {
             <Col>
               <div className="row justify-content-center mt-5 ms-4">
                 <div className="col-11 col-sm-11 col-md-11">
-                  <a href="/appmail_contacts" className="bloc">
+                  <a href="/dashboardAppmail" className="bloc">
                     <div className="card mt-5">
                       <div className="card-header">
                         <h3 className="card-title">
@@ -148,7 +150,7 @@ const Home = () => {
             <Col>
               <div className="row justify-content-center mt-5">
                 <div className="col-11 col-sm-11 col-md-11">
-                  <a href="/appmail_contacts" className="bloc">
+                  <a href="/dashboardAppmai" className="bloc">
                     <div className="card mt-5">
                       <div className="card-header">
                         <h3 className="card-title">
@@ -219,53 +221,53 @@ const Home = () => {
           </Row>
           <Row>
             {/* ===================================================================== UTILISATEURS =============================================== */}
+            {role === 1 && (
+              <Col>
+                <div className="row justify-content-center mt-2 ms-4">
+                  <div className="col-11 col-sm-11 col-md-11">
+                    <a href="/users" className="bloc">
+                      <div className="card mt-5">
+                        <div className="card-header">
+                          <h3 className="card-title">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="25"
+                              height="25"
+                              fill="currentColor"
+                              class="bi bi-people"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+                            </svg>
+                            <span className="menu">Utilisateurs</span>
+                          </h3>
+                        </div>
 
-            <Col>
-              <div className="row justify-content-center mt-2 ms-4">
-                <div className="col-11 col-sm-11 col-md-11">
-                  <a href="/users" className="bloc">
-                    <div className="card mt-5">
-                      <div className="card-header">
-                        <h3 className="card-title">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="25"
-                            height="25"
-                            fill="currentColor"
-                            class="bi bi-people"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
-                          </svg>
-                          <span className="menu">Utilisateurs</span>
-                        </h3>
-                      </div>
-
-                      <div className="card-body">
-                        <Table striped bordered hover>
-                          <thead>
-                            <tr>
-                              <th>Prénoms</th>
-                              <th>Noms</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {users.map((user) => (
-                              <tr key={user.id}>
-                                <td>{user.user_firstname}</td>
-                                <td>{user.user_lastname}</td>
+                        <div className="card-body">
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                <th>Prénoms</th>
+                                <th>Noms</th>
                               </tr>
-                            ))}
-                          </tbody>
-                        </Table>
+                            </thead>
+                            <tbody>
+                              {users.map((user) => (
+                                <tr key={user.id}>
+                                  <td>{user.user_firstname}</td>
+                                  <td>{user.user_lastname}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </div>
                       </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </Col>
+              </Col>
+            )}
             {/* ===================================================================== MON COMPTE =============================================== */}
-
             <Col>
               <div className="row justify-content-center mt-2">
                 <div className="col-11 col-sm-11 col-md-11">

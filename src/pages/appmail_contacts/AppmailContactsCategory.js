@@ -10,10 +10,11 @@ import Modal from "react-bootstrap/Modal";
 import Sidebar from "../../components/Sidebar";
 import Navigation from "../../components/Navigation";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const AppmailContacts = () => {
   const { appmail_category } = useParams();
+  const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [contactsBusiness, setContactsBusiness] = useState([]);
   const [category, setCategory] = useState([]);
@@ -49,7 +50,11 @@ const AppmailContacts = () => {
 
   // // ------------Récupértion value du Select Catégories------------------------------------------//
   const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
+    const categoryId = event.target.value;
+    setSelectedValue(categoryId);
+    /* eslint-disable no-restricted-globals */
+    navigate(`/appmail_contacts/category/${categoryId}`);
+    window.location.reload();
   };
   // // ------------ Fin Récupértion value du Select------------------------------------------//
 
